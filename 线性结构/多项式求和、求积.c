@@ -14,6 +14,7 @@ Poly MultiPoly(Poly P1,Poly P2);
 void Output(Poly P);
 void Attach(int c,int e,Poly *pRear);
 int Compare(int p1,int p2);
+Poly MultiPoly2(Poly P1,Poly P2); 
 
 int main()
 {
@@ -58,7 +59,8 @@ void Attach(int c,int e,Poly *pRear)//*pRear为指针的指针
 
 Poly AddPoly(Poly P1,Poly P2)
 {
-	Poly Ps,Rear,temp;//意义和之前的ReadPoly函数中的Poly P,Rear,t一致 
+	Poly Ps,Rear,temp;//意义和之前的ReadPoly函数中的Poly P,Rear,t一致
+	if(!P1 || !P2) return NULL; 
 	int sum;
 	Ps=(Poly)malloc(sizeof(struct PolyNode));
 	Ps->Next=NULL;
@@ -113,6 +115,7 @@ int Compare(int a,int b)
 Poly MultiPoly(Poly P1,Poly P2)
 {
 	Poly Pm,Rear,Rear2,temp,temp2,P,t1,t2;
+	if(!P1 || !P2) return NULL;
 	t2=P2;
 	Pm=(Poly)malloc(sizeof(struct PolyNode));
 	Pm->Next=NULL;
@@ -134,6 +137,47 @@ Poly MultiPoly(Poly P1,Poly P2)
 		Pm=AddPoly(Pm,P);
 		P1=P1->Next;
 	}
+	return Pm;
+}
+
+Poly MultiPoly2(Poly P1,Poly P2)
+{
+	if(!P1 || !P2) return NULL;
+	Poly Pm,Rear,temp,t1,t2,Rear2,t;
+	t1=P1;t2=P2;
+	Pm=(Poly)malloc(sizeof(struct PolyNode));
+	Rear=Pm;
+	Pm->Next=NULL;
+	for(;t2;t2=t2->Next){
+		Attach(t1->coef*t2->coef,t1->expo+t2->expo,&Rear);
+	}
+	t1=t1->Next;
+	int c,e,sum;
+	for(;t1;t1=t1->Next){
+		t2=P2;Rear2=Pm;
+		for(;t2;t2=t2->Next){
+			c=t1->coef*t2->coef;
+			e=t1->expo+t2->expo;
+			while(Rear2->Next&&Rear2->Next->expo>e) Rear2=Rear2->Next;
+			if(Rear2->Next&&Rear2->Next->expo==e){
+				if(Rear2->Next->coef+c){
+					Rear2->Next->coef+=c;
+				}else{
+					t=Rear2->Next;
+					Rear2->Next=t->Next;
+					free(t);
+				}
+			}else{
+				t=(Poly)malloc(sizeof(struct PolyNode));
+				t->coef=c;
+				t->expo=e;
+				t->Next=Rear2->Next;
+				Rear2->Next=t;
+				Rear2->Next=Rear2;//不知道何用意 
+			}
+		}
+	}
+	temp=Pm;Pm=Pm->Next;free(temp);
 	return Pm;
 }
 
