@@ -34,18 +34,18 @@ Poly ReadPoly()
 	int c,e,N;
 	Poly P,Rear,t;
 	scanf("%d",&N);
-	P=(Poly)malloc(sizeof(struct PolyNode));//¹¹½¨Á´±íÍ·¿Õ½áµã 
+	P=(Poly)malloc(sizeof(struct PolyNode));//æ„å»ºé“¾è¡¨å¤´ç©ºç»“ç‚¹ 
 	P->Next=NULL;
-	Rear=P;//¹¹½¨Î²²¿½ÚµãÁÙÊ±´æ·ÅÊı¾İ£¿ÊÇ·ñ¿ÉÒÔÕâÑùÀí½â£¿»òÕß¿ÉÒÔÀí½â³É³õÊ¼»¯Ëù±ØĞë£¿ 
+	Rear=P;//æ„å»ºå°¾éƒ¨èŠ‚ç‚¹ä¸´æ—¶å­˜æ”¾æ•°æ®ï¼Ÿæ˜¯å¦å¯ä»¥è¿™æ ·ç†è§£ï¼Ÿæˆ–è€…å¯ä»¥ç†è§£æˆåˆå§‹åŒ–æ‰€å¿…é¡»ï¼Ÿ 
 	for(;N;N--){
 		scanf(" %d %d",&c,&e);
-		Attach(c,e,&Rear);//½«µ±Ç°Ïî²åÈë¶àÏîÊ½Î²²¿(Rear) 
+		Attach(c,e,&Rear);//å°†å½“å‰é¡¹æ’å…¥å¤šé¡¹å¼å°¾éƒ¨(Rear) 
 	}
-	t=P;P=P->Next;free(t);//É¾³ıÁÙÊ±Éú³ÉµÄÍ·½áµã£¬²¢½«µÚÒ»Ïî×÷ÎªÍ·½áµã(¼´½øĞĞÊÕÎ²£¬°Ñ±íÍ·¿Õ½áµã×ªÒÆÖÁµÚÒ»¸öÓĞÊı¾İµÄ½áµã£¿) 
+	t=P;P=P->Next;free(t);//åˆ é™¤ä¸´æ—¶ç”Ÿæˆçš„å¤´ç»“ç‚¹ï¼Œå¹¶å°†ç¬¬ä¸€é¡¹ä½œä¸ºå¤´ç»“ç‚¹(å³è¿›è¡Œæ”¶å°¾ï¼ŒæŠŠè¡¨å¤´ç©ºç»“ç‚¹è½¬ç§»è‡³ç¬¬ä¸€ä¸ªæœ‰æ•°æ®çš„ç»“ç‚¹ï¼Ÿ) 
 	return P; 
 } 
 
-void Attach(int c,int e,Poly *pRear)//*pRearÎªÖ¸ÕëµÄÖ¸Õë 
+void Attach(int c,int e,Poly *pRear)//*pRearä¸ºæŒ‡é’ˆçš„æŒ‡é’ˆ 
 {
 	Poly P;
 	
@@ -54,17 +54,17 @@ void Attach(int c,int e,Poly *pRear)//*pRearÎªÖ¸ÕëµÄÖ¸Õë
 	P->expo=e;
 	P->Next=NULL;
 	(*pRear)->Next=P;
-	*pRear=P;//ĞŞ¸ÄpRearÖµ£¬ÆäÊµ¾ÍÊÇ°Ñ´ËÊ±µÄrearĞŞ¸Ä³ÉP£¬±ãÓÚ½ÓÏÂÀ´µÄ¼ÆËã 
+	*pRear=P;//ä¿®æ”¹pRearå€¼ï¼Œå…¶å®å°±æ˜¯æŠŠæ­¤æ—¶çš„rearä¿®æ”¹æˆPï¼Œä¾¿äºæ¥ä¸‹æ¥çš„è®¡ç®— 
 }
 
 Poly AddPoly(Poly P1,Poly P2)
 {
-	Poly Ps,Rear,temp;//ÒâÒåºÍÖ®Ç°µÄReadPolyº¯ÊıÖĞµÄPoly P,Rear,tÒ»ÖÂ
+	Poly Ps,Rear,temp;//æ„ä¹‰å’Œä¹‹å‰çš„ReadPolyå‡½æ•°ä¸­çš„Poly P,Rear,tä¸€è‡´
 	if(!P1 || !P2) return NULL; 
 	int sum;
 	Ps=(Poly)malloc(sizeof(struct PolyNode));
 	Ps->Next=NULL;
-	Rear=Ps;//ÓÉfront¼ÇÂ¼½á¹û¶àÏîÊ½Á´±íÍ·½áµã£¬ÆäÊµ±¾ÖÊÉÏfront´ËÊ±Ö¸´úµÄ¾ÍÊÇrear£¿»òÕßËµÒªÏë½¨Á¢Ò»¸öĞÂµÄÁ´±í¾Í±ØĞëÒªÓĞRearµÄ´æÔÚÒÔÈ·¶¨Î»ÖÃ£¿¶øÔÚºóÃæµÄÑ­»·ÖĞÍ¨¹ıAttachº¯ÊıÖĞmalloc¿Õ¼ä¸øPÀ´ÊµÏÖÁ´±í 
+	Rear=Ps;//ç”±frontè®°å½•ç»“æœå¤šé¡¹å¼é“¾è¡¨å¤´ç»“ç‚¹ï¼Œå…¶å®æœ¬è´¨ä¸Šfrontæ­¤æ—¶æŒ‡ä»£çš„å°±æ˜¯rearï¼Ÿæˆ–è€…è¯´è¦æƒ³å»ºç«‹ä¸€ä¸ªæ–°çš„é“¾è¡¨å°±å¿…é¡»è¦æœ‰Rearçš„å­˜åœ¨ä»¥ç¡®å®šä½ç½®ï¼Ÿè€Œåœ¨åé¢çš„å¾ªç¯ä¸­é€šè¿‡Attachå‡½æ•°ä¸­mallocç©ºé—´ç»™Pæ¥å®ç°é“¾è¡¨ 
 	while(P1 && P2){
 		switch(Compare(P1->expo,P2->expo)){
 			case 1:
@@ -85,7 +85,7 @@ Poly AddPoly(Poly P1,Poly P2)
 				break;
 		}
 	}
-	//½«Î´´¦ÀíÍêµÄÁíÒ»¸ö¶àÏîÊ½µÄËùÓĞ½áµãÒ»´Î¸´ÖÆµ½½á¹û¶àÏîÊ½ÖĞÈ¥£¬Æä±¾ÖÊÖ»ÊÇÍ¨¹ıÑ­»·À´ÊµÏÖÊı¾İµÄ×ªÒÆ 
+	//å°†æœªå¤„ç†å®Œçš„å¦ä¸€ä¸ªå¤šé¡¹å¼çš„æ‰€æœ‰ç»“ç‚¹ä¸€æ¬¡å¤åˆ¶åˆ°ç»“æœå¤šé¡¹å¼ä¸­å»ï¼Œå…¶æœ¬è´¨åªæ˜¯é€šè¿‡å¾ªç¯æ¥å®ç°æ•°æ®çš„è½¬ç§» 
 	for(;P1;P1=P1->Next){
 		Attach(P1->coef,P1->expo,&Rear);
 	}
@@ -123,7 +123,7 @@ Poly MultiPoly(Poly P1,Poly P2)
 	for(;t2;t2=t2->Next){
 		Attach(P1->coef*t2->coef,P1->expo+t2->expo,&Rear);
 	}
-	P1=P1->Next;temp=Pm;Pm=Pm->Next;free(temp);//µÃµ½µÚÒ»¸öPm
+	P1=P1->Next;temp=Pm;Pm=Pm->Next;free(temp);//å¾—åˆ°ç¬¬ä¸€ä¸ªPm
 	while(P1){
 		P=(Poly)malloc(sizeof(struct PolyNode));
 		P->Next=NULL;
@@ -140,7 +140,7 @@ Poly MultiPoly(Poly P1,Poly P2)
 	return Pm;
 }
 
-Poly MultiPoly2(Poly P1,Poly P2)
+Poly MultiPoly2(Poly P1,Poly P2)//å„é¡¹æ±‚ç§¯åçš„ç»“æœæ’å…¥é¦–æ¬¡åˆ›å»ºçš„é“¾è¡¨ä¸­
 {
 	if(!P1 || !P2) return NULL;
 	Poly Pm,Rear,temp,t1,t2,Rear2,t;
@@ -173,7 +173,7 @@ Poly MultiPoly2(Poly P1,Poly P2)
 				t->expo=e;
 				t->Next=Rear2->Next;
 				Rear2->Next=t;
-				Rear2->Next=Rear2;//²»ÖªµÀºÎÓÃÒâ 
+				Rear2->Next=Rear2;//ä¸çŸ¥é“ä½•ç”¨æ„ 
 			}
 		}
 	}
